@@ -8,7 +8,7 @@ using namespace std;
 list<int> listx; 
 list<int> listy; 
 list<int> listvals; 
-     int board[10][10]; 
+     int board[10][10]; // (kajal)we are using a 10 by 10 grid for input, just for a test case 
      int input; 
      int a; 
      int b; 
@@ -82,6 +82,7 @@ cx = listx.back();
 cy = listy.back(); 
      x = cx; 
      y = cy + 1; 
+     
      if((x > -1)&&(x < 10)&&(y > -1)&&(y < 10)) 
      { 
           if(check(x,y) == false) 

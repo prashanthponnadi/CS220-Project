@@ -37,6 +37,7 @@
 	while(1) 
 	          { 
 	cout << endl; 
+	// shows the input options.
 	cout << "1. display" <<endl; 
 	cout << "2. add" <<endl; 
 	cout << "3. search" <<endl; 
@@ -51,6 +52,7 @@
 	     } 
 	else if (input == 2) 
 	     { 
+	     	 	//get the value for starting point and ending point
 	cout << endl; 
 	cout << "please give start position in row and start position in coloumn to found path from"; 
 	cin >> value2;//starting x 
@@ -64,6 +66,7 @@
 	     } 
 	else if (input ==3) 
 	     { 
+	    
 	 cout<<"value 2:"<<value2<<endl;
 	 cout<<"value 3:"<<value3<<endl;
 	 cout<<"value 4:"<<value4<<endl;
@@ -77,7 +80,7 @@
 	     listy.push_front(value3); 
 	     listvals.push_front(cv); 
 	     do{ 
-	cv = listvals.back(); 
+	cv = listvals.back(); //kajal
 	cx = listx.back(); 
 	cy = listy.back(); 
 	     x = cx; 
