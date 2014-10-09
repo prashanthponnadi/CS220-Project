@@ -87,12 +87,13 @@ cy = listy.back();
       
      if((x > -1)&&(x < 10)&&(y > -1)&&(y < 10))  
      {  
-          if(check(x,y) == false)  
+          if((check(x,y) == false))   
           {     
                if (x==blx1 && y==bly1){ 
                  //x = -2; 
                  //y = -2; 
                  board[x][y] = -10; 
+                 
                } 
                else{ 
                board[x][y] = (cv + 1);  
@@ -105,21 +106,28 @@ cy = listy.back();
      }  
      else  
      {  
-          x = 0;  
-          y = 0;  
+          x = listx.back();
+          y = listy.back(); 
      }  
-if((x == gx)&&(y == gy)){found = true;}  
+if(x == gx && y==gy){
+     
+       found = true;
+     
+     board[gx][gy]=cv+1; //added by kajal 
+
+      break;    } 
  
      x = cx + 1;  
      y = cy;  
      if((x > -1)&&(x < 10)&&(y > -1)&&(y < 10))  
      {  
-          if(check(x,y) == false)  
+        if((check(x,y) == false)) 
           {  
                if (x == blx1 && y == bly1){ 
                   //x = -2; 
                  //y = -2; 
                  board[x][y] = -10; 
+                
                } 
                else{ 
                board[x][y] = (cv + 1);  
@@ -132,20 +140,27 @@ if((x == gx)&&(y == gy)){found = true;}
      }  
      else  
      {  
-          x = 0;  
-          y = 0;  
+            x = listx.back();
+          y = listy.back(); 
      }  
-if((x == gx)&&(y == gy)){found = true;}  
+if(x == gx && y==gy){
+     
+       found = true;
+     
+     board[gx][gy]=cv+1; //added by kajal 
+
+      break;    }  
      x = cx;  
      y = cy - 1;  
      if((x > -1)&&(x < 10)&&(y > -1)&&(y < 10))  
      {  
-          if(check(x,y) == false)  
+          if((check(x,y) == false))  
           {  
                if (x==blx1 && y==bly1){ 
                   //x = -2; 
                  //y = -2; 
                  board[x][y] = -10; 
+                
                } 
                else{ 
                board[x][y] = (cv + 1);  
@@ -158,20 +173,27 @@ if((x == gx)&&(y == gy)){found = true;}
      }  
      else  
      {  
-          x = 0;  
-          y = 0;  
+           x = listx.back();
+          y = listy.back(); 
      }  
-if((x == gx)&&(y == gy)){found = true;}  
+if(x == gx && y==gy){
+     
+       found = true;
+     
+     board[gx][gy]=cv+1; //added by kajal 
+
+      break;    }  
      x = cx - 1;  
      y = cy;  
      if((x > -1)&&(x < 10)&&(y > -1)&&(y < 10))  
      {  
-          if(check(x,y) == false)  
+         if((check(x,y) == false))   
           {  
                if (x==blx1 && y==bly1){ 
                   //x = -2; 
                  //y = -2; 
                  board[x][y] = -10; 
+                 
                } 
                else{ 
                board[x][y] = (cv + 1);  
@@ -183,21 +205,30 @@ if((x == gx)&&(y == gy)){found = true;}
           }  
      }  
      else  
-     {  
-          x = 0;  
-          y = 0;  
+     {    x = listx.back();
+          y = listy.back(); 
      }  
 /*if((x == gx)&&(y == gy)){found = true;}  
      x = cx + 1;  
      y = cy + 1;  
      if((x > -1)&&(x < 10)&&(y > -1)&&(y < 10))  
      {  
-          if(check(x,y) == false)  
+          if((check(x,y) == false) && (board[x][y]==0)) 
           {  
+              if (x==blx1 && y==bly1){ 
+                  //x = -2; 
+                 //y = -2; 
+                 board[x][y] = -10; 
+                 listx.push_front(x);  
+               listy.push_front(y); 
+               } 
+               else{ 
                board[x][y] = (cv + 1);  
+                
                listx.push_front(x);  
                listy.push_front(y);  
                listvals.push_front((cv + 1));  
+          }
           }  
      }  
      else  
@@ -205,7 +236,7 @@ if((x == gx)&&(y == gy)){found = true;}
           x = 0;  
           y = 0;  
      } 
-*/  
+ 
 //if((x == gx)&&(y == gy)){found = true;}  
  
 if((x == gx)&&(y == gy)){found = true;}  
@@ -213,12 +244,14 @@ if((x == gx)&&(y == gy)){found = true;}
      y = cy -1;  
      if((x > -1)&&(x < 10)&&(y > -1)&&(y < 10))  
      {  
-          if(check(x,y) == false)  
+         if((check(x,y) == false)&& (board[x][y]==0))   
           {  
                if (x==blx1 && y==bly1){ 
                   //x = -2; 
                  //y = -2; 
                  board[x][y] = -10; 
+                  listx.push_front(x);  
+               listy.push_front(y);
                } 
                else{ 
                board[x][y] = (cv + 1);  
@@ -241,12 +274,14 @@ if((x == gx)&&(y == gy)){found = true;}
      y = cy - 1;  
      if((x > -1)&&(x < 10)&&(y > -1)&&(y < 10))  
      {  
-          if(check(x,y) == false)  
+          if((check(x,y) == false)&& (board[x][y]==0))   
           {  
                if (x==blx1 && y==bly1){ 
                   //x = -2; 
                  //y = -2; 
                  board[x][y] = -10; 
+                  listx.push_front(x);  
+               listy.push_front(y);
                } 
                else{ 
                board[x][y] = (cv + 1);  
@@ -269,12 +304,14 @@ if((x == gx)&&(y == gy)){found = true;}
      y = cy + 1;  
      if((x > -1)&&(x < 10)&&(y > -1)&&(y < 10))  
      {  
-          if(check(x,y) == false)  
+          if((check(x,y) == false)&& (board[x][y]==0))  
           {  
                if (x==blx1 && y==bly1){ 
                   //x = -2; 
                  //y = -2; 
                  board[x][y] = -10; 
+                  listx.push_front(x);  
+               listy.push_front(y);
                } 
                else{ 
                board[x][y] = (cv + 1);  
@@ -289,16 +326,22 @@ if((x == gx)&&(y == gy)){found = true;}
      {  
           x = 0;  
           y = 0;  
-     }  
-if((x == gx)&&(y == gy)){found = true;}  
+     }  */
+if(x == gx && y==gy){
+     
+       found = true;
+     
+     board[gx][gy]=cv+1; //added by kajal 
+
+      break;    } 
+  
  // board[gx+1][gy+1]=1;  
 // board[gx][gy]=cv+1;  
-board[gx][gy]=cv+1; //added by kajal 
 cv = cv+1;  
           listx.pop_back();  
           listy.pop_back();  
           listvals.pop_back();  
-     }while (found ==false);  
+     }while (found==false);  
 } 
 else if (input ==4) 
 { 
@@ -316,6 +359,7 @@ else if (input ==4)
           if(val-1==board[op][sy]){
              val=board[op][sy]; 
              board[op][sy]=-1;
+             cout<<"("<<op<<","<<sy<<")"<<endl;
              sx=sx+1;
              
          }
@@ -326,8 +370,9 @@ else if (input ==4)
       if(val-1==board[op][sy]){
               val=board[op][sy]; 
              board[sx][sy]=-1;
+              cout<<"("<<op<<","<<sy<<")"<<endl;
              sx= sx-1;
-             
+              
          }
          
          
@@ -336,6 +381,7 @@ else if (input ==4)
        if(val-1==board[sx][op]){
               val=board[sx][op]; 
              board[sx][sy]=-1;
+              cout<<"("<<sx<<","<<op<<")"<<endl;
              sy=sy-1;
             
          }
@@ -344,19 +390,16 @@ else if (input ==4)
     if(val-1==board[sx][op]){
                val=board[sx][op]; 
              board[sx][sy]=-1;
+              cout<<"("<<sx<<","<<op<<")"<<endl;
              sy=sy+1;
             
          }
-         
-        
-         
-         
-         
-         
-         
-    
-         
-     }while(board[sx][sy]>0);
+
+       if((sx==cx)&&(sy==cy)){
+          board[sx][sy]=-1;
+          break;
+       }
+     }while((val>0));
 } 
 else if (input ==5) 
 { 
