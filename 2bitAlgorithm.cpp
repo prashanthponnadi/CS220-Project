@@ -323,7 +323,7 @@
 					
 	}
 	
-		else if (cv == 2)
+		else if (cv == 2)// goes untill 2 only for a 2 bit algorithm.
 	{
 		board[x][y] = 1;
 		listx.push_front(x); 
