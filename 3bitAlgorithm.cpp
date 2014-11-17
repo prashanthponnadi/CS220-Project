@@ -66,7 +66,8 @@
 	     } 
 	else if (input ==3) 
 	     { 
-	    
+	    int blx1=2;
+     int bly1=2; 
 	 cout<<"value 2:"<<value2<<endl;
 	 cout<<"value 3:"<<value3<<endl;
 	 cout<<"value 4:"<<value4<<endl;
@@ -89,6 +90,12 @@
 	     { 
 	          if(check(x,y) == false) 
 	          { 
+				  if (x==blx1 && y==bly1){ 
+                 //x = -2; 
+                 //y = -2; 
+                 board[x][y] = -10; 
+               } 
+               else{ 
 				  if(cv == 1)
 				  {
 					
@@ -122,7 +129,7 @@
 				}
 			  
 	              //cv=cv + 1;
-				
+				}
 		     }
 	               
 	     } 
@@ -140,6 +147,12 @@
 	     { 
 	          if(check(x,y) == false) 
 	          { 
+	              if (x==blx1 && y==bly1){ 
+                 //x = -2; 
+                 //y = -2; 
+                 board[x][y] = -10; 
+               } 
+               else{ 
 	               if(cv == 1)
 				  {
 					
@@ -173,7 +186,7 @@
 			  
 	              //cv=cv + 1;
 		   
-	               
+	               }
 	          }
 	     } 
 	     else 
@@ -188,6 +201,12 @@
 	     { 
 	          if(check(x,y) == false) 
 	          { 
+	          	if (x==blx1 && y==bly1){ 
+                 //x = -2; 
+                 //y = -2; 
+                 board[x][y] = -10; 
+               } 
+               else{ 
 	                if(cv == 1)
 				  {
 					
@@ -219,7 +238,7 @@
 	               listvals.push_front((1)); 
 			  }
 			  
-	              
+	              }
 	          }
 	     } 
 	     else 
@@ -234,6 +253,12 @@
 	     { 
 	          if(check(x,y) == false) 
 	          { 
+	          	if (x==blx1 && y==bly1){ 
+                 //x = -2; 
+                 //y = -2; 
+                 board[x][y] = -10; 
+               } 
+               else{ 
 	           if(cv == 1)
 				  {
 					
@@ -264,7 +289,8 @@
 	               listy.push_front(y); 
 	               listvals.push_front((1)); 
 			  }
-	
+	}
+
 	        }   
 	     } 
 	     else 
@@ -299,7 +325,14 @@
 	     if((x > -1)&&(x < 10)&&(y > -1)&&(y < 10)) 
 	     { 
 	          if(check(x,y) == false) 
-	          { if(cv == 1)
+	          { 
+	          	if (x==blx1 && y==bly1){ 
+                 //x = -2; 
+                 //y = -2; 
+                 board[x][y] = -10; 
+               } 
+               else{ 
+               	if(cv == 1)
 				  {
 					
 					board[x][y] = cv+1;
@@ -329,7 +362,7 @@
 	               listy.push_front(y); 
 	               listvals.push_front((1));  
 			  }
-			  
+			  }
 	         }  
 	     } 
 	     else 
@@ -339,13 +372,19 @@
 	     } 
 	
 	if((x == gx)&&(y == gy)){found = true;} 
-	if((x == gx)&&(y == gy)){found = true;} 
+	
 	     x = cx - 1; 
 	     y = cy - 1; 
 	     if((x > -1)&&(x < 10)&&(y > -1)&&(y < 10)) 
 	     { 
 	          if(check(x,y) == false) 
 	          { 
+	          	if (x==blx1 && y==bly1){ 
+                 //x = -2; 
+                 //y = -2; 
+                 board[x][y] = -10; 
+               } 
+               else{ 
 	              if(cv == 1)
 				  {
 					
@@ -378,6 +417,7 @@
 			  }
 	       }    
 	     } 
+	 }
 	     else 
 	     { 
 	          x = 0; 
@@ -385,13 +425,20 @@
 	     } 
 	
 	if((x == gx)&&(y == gy)){found = true;} 
-	if((x == gx)&&(y == gy)){found = true;} 
+	
 	     x = cx - 1; 
 	     y = cy + 1; 
 	     if((x > -1)&&(x < 10)&&(y > -1)&&(y < 10)) 
 	     { 
 	          if(check(x,y) == false) 
-	          { if(cv == 1)
+	          { 
+	          	if (x==blx1 && y==bly1){ 
+                 //x = -2; 
+                 //y = -2; 
+                 board[x][y] = -10; 
+               } 
+               else{ 
+	          	if(cv == 1)
 				  {
 					
 					board[x][y] = cv+1;
@@ -424,6 +471,7 @@
 
 	          }
 	     } 
+	 }
 	     else 
 	     { 
 	          x = 0; 
@@ -453,128 +501,102 @@
 	     }while (found ==false); 
 	} 
 	else if (input ==4) 
-	{ 
-	     int gx = value4;//[y][x] 
-	     int gy = value5;//[y][x] 
-	     y = gx; 
-	     x = gy; 
-	     int val; 
-	     int newval;
-	     val = board[gx][gy]; 
-	     board[gx][gy] = -1; 
-	     do{ 
-	          //top 
-	          newval=val;
-	          gy++; 
-	     if(((x+1) > -1)&&((x+1) < 10)&&((y+1) > -1)&&((y+1) < 10)&&(board[x][y + 1] > 0)&&(board[x][y + 1] < val)) 
-	     { 
-	          
-	          
-	          val = board[gx][gy]; 
-	          if (newval-1==val){
-				  x=gx;
-				  y=gy;
-				  continue;
-			  }
-	          board[gx][gy] = -1; 
-	     } 
-	     else{ 
-	               gx++; 
-	               gy++; 
-	          if(((x+1) > -1)&&((x+1) < 10)&&((y+1) > -1)&&((y+1) < 10)&&(board[x + 1][y + 1] > 0)&&(board[x + 1][y + 1] < val)) 
-	          { 
-	               val = board[gx][gy]; 
-	          if (newval-1==val){
-				  x=gx;
-				  y=gy;
-				  continue;
-			  }
-	               val = board[gx][gy]; 
-	               board[gx][gy] = -1;//[y][x] 
-	          }else{ 
-	                
-	                   
-	                    gx++; 
-	               if(((x+1) > -1)&&((x+1) < 10)&&((y-1) > -1)&&((y-1) < 10)&&(board[x + 1][y] > 0)&&(board[x + 1][y] < val)) 
-	               { 
-					   val = board[gx][gy]; 
-	          if (newval-1==val){
-				  x=gx;
-				  y=gy;
-				  continue;
-			  }
-	                    val = cv-1; 
-	                    board[gx][gy] = -1; 
-	               }else{ 
-	                     
-	                         gx++; 
-	                         gy--; 
-	                    if((x > -1)&&(x < 10)&&((y-1) > -1)&&((y-1) < 10)&&(board[x + 1][y - 1] > 0)&&(board[x + 1][y - 1] < val)) 
-	                    { 
-							val = board[gx][gy]; 
-	          if (newval-1==val){
-				  x=gx;
-				  y=gy;
-				  continue;
-			  }
-	                         val = cv-1; 
-	                         board[gx][gy] = -1; 
-	                    }else{ 
-	                          
-	                              gy--; 
-	                         if(((x-1) > -1)&&((x-1) < 10)&&((y+1) > -1)&&((y+1) < 10)&&(board[x][y - 1] > 0)&&(board[x][y - 1] < val)) 
-	                         { 
-	                             val = board[gx][gy]; 
-	          if (newval-1==val){
-				  x=gx;
-				  y=gy;
-				  continue;
-			  }
-	                              val = cv-1; 
-	                              board[gx][gy] = -1; 
-	                         }else{ 
-	                                   gy--; 
-	                                   gx--; 
-	                              if((x > -1)&&(x < 10)&&(y > -1)&&(y < 10)&&(board[x - 1][y - 1] > 0)&&(board[x - 1][y - 1] < val)) 
-	                              { 
-									  val = board[gx][gy]; 
-	          if (newval-1==val){
-				  x=gx;
-				  y=gy;
-				  continue;
-			  }
-	                                   val = cv-1; 
-	                                   board[gx][gy] = -1; 
-	                              }else{ 
-	                                        gx--; 
-	                                   if(((x-1) > -1)&&((x-1) < 10)&&(y > -1)&&(y < 10)&&(board[x - 1][y] > 0)&&(board[x - 1][y] < val)) 
-	                                   { 
-										   val = board[gx][gy]; 
-	          if (newval-1==val){
-				  x=gx;
-				  y=gy;
-				  continue;
-			  }
-	                                        val = cv-1;//board[x][y]; 
-	                                        board[gx][gy] = -1; 
-	                                   }else{ 
-	                                             gy++; 
-	                                             gx--; 
-	                                        if(((x-1) > -1)&&((x-1) < 10)&&((y+1) > -1)&&((y+1) < 10)&&(board[x - 1][y + 1] > 0)&&(board[x - 1][y + 1] < val)) 
-	                                        { 
-	                                            val = board[gx][gy]; 
-	          if (newval-1==val){
-				  x=gx;
-				  y=gy;
-				 
-				  continue;
-			  }
-	                                             val = cv-1; 
-	                                             board[gx][gy] = -1; 
-	                                        }else{}}}}}}}} 
-	          if((gx == value3)&&(gy == value2)){startfound = true;} 
-	     }while(startfound==false); 
-	} 
+{ 
+     int sx=value4;
+     int sy=value5;
+     int cx=value2;
+     int cy=value3;
+     int op;
+    int cal = ((sx==cx) && (sy==cy));
+    int val=board[sx][sy];
+     do{
+       if((val==3)||(val==2)){
+         op=sx+1;
+         
+          if(val-1==board[op][sy]){
+             val=board[op][sy]; 
+             board[op][sy]=-1;
+             sx=sx+1;
+             
+         }
+         }
+         else {
+         op=sx+1;
+         
+          if(board[op][sy]==3){
+             val=board[op][sy]; 
+             board[op][sy]=-1;
+             sx=sx+1;
+             
+         }	
+         }
+         if((val==3)||(val==2)){
+         op=sx-1;
+         
+      if(val-1==board[op][sy]){
+              val=board[op][sy]; 
+             board[sx][sy]=-1;
+             sx= sx-1;
+             
+         }
+         }
+         else {
+         	if(board[op][sy]==3){
+              val=board[op][sy]; 
+             board[sx][sy]=-1;
+             sx= sx-1;
+             
+         }
+         }
+       if((val==3)||(val==2)){
+         op=sy-1;
+       if(val-1==board[sx][op]){
+              val=board[sx][op]; 
+             board[sx][sy]=-1;
+             sy=sy-1;
+            
+         }
+        }
+        else {
+        	 op=sy-1;
+       if(board[sx][op]==3){
+              val=board[sx][op]; 
+             board[sx][sy]=-1;
+             sy=sy-1;
+            
+         }
+        }
+        if((val==3)||(val==2)){
+          op=sy+1;
+        
+    if(val-1==board[sx][op]){
+               val=board[sx][op]; 
+             board[sx][sy]=-1;
+             sy=sy+1;
+            
+         }
+         }
+         else {
+         	 op=sy+1;
+        
+    if(board[sx][op]==3){
+               val=board[sx][op]; 
+             board[sx][sy]=-1;
+             sy=sy+1;
+            
+         }
+         }
+        
+         
+         
+         
+         
+         
+    
+         
+     }while( !((sx==value2) && (sy==value3)) );
+     board[cx][cy]=-1;
+ }
 	else if (input ==5) 
 	{ 
 	exit(1); 
