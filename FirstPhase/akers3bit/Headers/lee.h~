@@ -1,0 +1,17 @@
+
+class lee
+{
+
+public:
+
+
+int creatematrix(int hieght, int width);
+void readdata();
+void lee_search();
+void lee_traceback();
+void display();
+bool check(int, int);
+void lee_blockages(blockage_x, blockage_y,blockage_width, blockage_height);
+
+};
+

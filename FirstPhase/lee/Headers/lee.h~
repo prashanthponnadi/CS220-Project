@@ -1,0 +1,25 @@
+
+class lee
+{
+
+public:
+
+
+//int board[10][10];
+lee()
+{
+}
+//lee(int a, int b);
+~lee()
+{
+}
+
+int creatematrix(int hieght, int width);
+void readdata();
+void lee_search();
+void lee_traceback();
+void display();
+bool check(int, int);
+
+};
+

@@ -1,0 +1,109 @@
+
+#include "../Headers/grid.h"
+#include "../Headers/problem_object.h"
+#include "../Headers/aker.h"
+#include <time.h>
+#include <list>
+#include <cstdlib>
+#include <iostream>
+
+using std::cerr;
+using std::cout;
+using std::endl;
+
+int blockage_x, blockage_y,blockage_width, blockage_height, size;
+
+int main(int argc,char* argv[]) {
+
+	// DO NOT CHANGE THIS SECTION OF CODE
+	if(argc < 2) { 
+		cout << "Usage: ./grid_router <test_file>" << endl; 
+		exit(1);
+	}
+	Utilities::ProblemObject* first_problem = new Utilities::ProblemObject(std::string(argv[1]));
+	// EDIT FROM HERE DOWN
+
+	//Create your problem map object (in our example, we use a simple grid, you should create your own)
+	Utilities::Grid g(first_problem->get_width(), first_problem->get_height());
+
+	
+
+	
+//prashanth
+	int width = first_problem->get_width();
+	int height = first_problem->get_height();
+	cout<<"!!!!\n";
+	cout<<width<<height<<endl;
+	aker akerobj;
+	//lee *leeobj = new lee();
+	
+	akerobj.creatematrix(height, width); // create first
+	vector<Blocker> blockages = first_problem->get_blockers();
+	
+	while(blockages.size() != 0)
+	{
+	size = blockages.size();
+	cout<<"Blockage "<<size<<" is from "<<blockages[size-1].location.x<<","<<blockages[size-1].location.y<<" with width "<<blockages[size-1].width<<"and height "<<blockages[size-1].height<<endl;
+	
+	akerobj.aker_blockages(blockage_x, blockage_y,blockage_width, blockage_height);
+	blockages.pop_back();
+	
+	}
+
+		akerobj.readdata();
+		akerobj.aker_search();
+		akerobj.aker_traceback();
+	
+
+
+	/*
+	Note: we do not take into account the connections or blockers that exist in the Project Object
+	You should be accouting for these in your problem map objects (you should not be using Grid). You
+	should be using both the Node and Edge classes as the background for whatever problem map object
+	you create.
+	*/
+
+	/*
+	Run your algorithm after creating your problem map object. You should be returning from your algorithm 
+	either a Path or a Netlist
+
+	Path: a series of straight line segments, with a single source and a single sink
+	Netlist: a series of stright line segments, with a single source and more than one sink
+	*/
+
+	//Note, we create random paths just as an example of how to create paths, netlists are created similarly
+/*	vector<Path*> paths;
+	srand(time(NULL));
+	int number_paths = first_problem->get_connections().size();
+	cout << "Creating " << number_paths << " paths...";
+	for (int ii = 0;ii < number_paths;ii++) {
+		Path* new_path = new Path();
+		int xxx = rand() % first_problem->get_width();
+		int yyy = rand() % first_problem->get_height();
+		int path_length = 1+rand()%10;
+		for (unsigned jj = 0;jj < path_length;jj++) {
+			bool direction = rand()%2;
+			Point head(xxx,yyy);
+			direction?xxx+=1:yyy+=1;
+			Point tail(xxx,yyy);
+			PathSegment* new_segment = new PathSegment(head,tail);
+			new_path->add_segment(new_segment);
+		}
+		paths.push_back(new_path);
+	}
+	cout << "Completed." << endl;
+
+	//Print the paths/netlists that you return from your algorithm
+	for(unsigned iii = 0; iii < paths.size(); iii++) {
+		cout << "Path " << iii << ": ";
+		paths.at(iii)->print();
+		Path* temp = paths.at(iii);
+		delete temp;
+	}
+
+	paths.clear();
+*/
+	delete first_problem;
+
+	return 0;
+}

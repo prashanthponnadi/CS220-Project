@@ -1,0 +1,493 @@
+#include "../Headers/problem_object.h"
+#include "../Headers/claim.h"
+#include "../Headers/aker.h"
+
+#include <iostream> 
+#include <list> 
+#include <stdlib.h>
+#include <deque> 
+#include <algorithm> 
+using namespace std; 
+
+
+     list<int> listx; 
+     list<int> listy; 
+     list<int> listvals;
+     int sizex, sizey; 
+     int input; 
+     int a; 
+     int b; 
+     int i=0; 
+     int j=0; 
+     int value; 
+     int startval; 
+     int startval_; 
+     int value2; 
+     int value3; 
+     int value4; 
+     int value5; 
+     int x; 
+     int y; 
+     int cv = 1; 
+     bool found = false; 
+     bool startfound =false; 
+     int ** board = NULL; 
+/*
+The creatematrix() function will will create a matrix of size height X width.
+It is in this matrix is where the searching from source to sink happens and traceback from sink to source happens.
+*/
+
+int aker::creatematrix(int height, int width)
+{
+	cout<<"BOARD SIZE IS"<<height<<width<<endl;
+	sizex = height;
+	sizey = width;
+  	board = (int**)malloc(4 * height);
+	if (board)
+	{
+  		for (i = 0; i < height; i++)
+  		{
+    			board[i] = (int*)malloc(4 * width);
+  		}
+	
+	return 1;
+	}
+	return 0;
+}
+
+/*
+The readdata() funtion asks the user for the co-ordinates of the source and the sink in the martrix.
+*/
+void aker::readdata()
+{
+
+	cout << "please give start position in row and start position in coloumn to found path from"; 
+	cin >> value2;//starting x 
+	cin >> value3;//starting y 
+	cout << "please give finish position in row and finish posiiton in coloumn to found path to"; 
+	cin >> value4; 
+	cin >> value5; 
+	value3 = value3-1, value2 = value2-1, value5 = value5-1, value4 = value4-1; 
+	board[value4][value5] = -1; 
+	board[value2][value3] = -1; 
+}
+
+/*
+The aker_blockages() funtion adds a blockage in the matrix so as to prevent the searching from source to sink
+and also the traceback from sink to source along the points where there are blockages.
+A blockage is represented by value -10 in the matrix.
+*/
+void aker::aker_blockages(int blockage_x,int blockage_y,int blockage_width,int blockage_height)
+{
+
+	for (int i =blockage_x+1; i<= (blockage_x+blockage_height); i++)
+	{
+		for(int j =blockage_y; j< (blockage_y+blockage_width); j++)
+		{
+				board[i][j] = -10;
+		}
+	}
+
+}
+/*
+The aker_search() funtion is responsible for searching for a route from the source to the sink. 
+Here cv is the current value that is being pushed into the matrix.
+*/
+void aker::aker_search()
+{
+         cout<<"value 2:"<<value2<<endl;
+	     cout<<"value 3:"<<value3<<endl;
+	     cout<<"value 4:"<<value4<<endl;
+	     cout<<"value 5:"<<value5<<endl;
+	     int cx = value2; 
+	     int cy = value3; 
+	     int gx = value4; 
+	     int gy = value5; 
+	     board[value2][value3] = cv; 
+	     listx.push_front(value2); 
+	     listy.push_front(value3); 
+	     listvals.push_front(cv); 
+	     do{ 
+	     cv = listvals.back(); 
+	     cx = listx.back(); 
+	     cy = listy.back(); // Check if search can continue in the cell that is below the current cell
+	     x = cx; 
+	     y = cy + 1; 
+	     if((x > -1)&&(x < sizex)&&(y > -1)&&(y < sizey)) // Check if the neighbouring cell is out of bounds of the matrix
+	     { 
+	          if(check(x,y) == false) 
+	          { 
+				  if (board[x][y] == -10){ 
+                 
+                   board[x][y] = -10; //if the co-ordinate is that of a blockage, add -10 back to the blockage co-ordinate
+               } 
+               else{ 
+				  if(cv == 1)
+				  {
+					
+				   board[x][y] = cv+1;
+				   listx.push_front(x); 
+	               listy.push_front(y); 
+	               listvals.push_front((cv + 1)); 
+					
+				  }
+				else if (cv == 2)
+				{
+					board[x][y] = cv+1;
+					listx.push_front(x); 
+	                listy.push_front(y); 
+	                listvals.push_front((cv + 1)); 
+				}
+				else if (cv == 3)
+				{
+					board[x][y] = 1;
+					listx.push_front(x); 
+	                listy.push_front(y); 
+	                listvals.push_front(1); 
+				}
+				else
+				{
+						cv=1;
+						board[x][y] = 1;
+						listx.push_front(x); 
+	                    listy.push_front(y); 
+	                    listvals.push_front((1)); 
+				}
+			  
+	              
+				}
+		     }
+	               
+	     } 
+	      
+	     else 
+	     { 
+	      x = listx.back();
+          y = listy.back(); 
+	     } 
+	if((x == gx)&&(y == gy)){found = true;} 
+	
+	     x = cx + 1; //Check if search can continue in the cell that is to the right of the current cell
+	     y = cy; 
+	     if((x > -1)&&(x < sizex)&&(y > -1)&&(y < sizey)) 
+	     { 
+	          if(check(x,y) == false) 
+	          { 
+	              if (board[x][y] == -10){ 
+               
+                 board[x][y] = -10; 
+               } 
+                   else{ 
+	               if(cv == 1)
+				  {
+					
+					board[x][y] = cv+1;
+					listx.push_front(x); 
+	               listy.push_front(y); 
+	               listvals.push_front((cv + 1)); 
+					
+	}
+	else if (cv == 2)
+	{
+		board[x][y] = cv+1;
+		listx.push_front(x); 
+	               listy.push_front(y); 
+	               listvals.push_front((cv + 1)); 
+		}
+		else if (cv == 3)
+	{
+		board[x][y] = 1;
+		listx.push_front(x); 
+	               listy.push_front(y); 
+	               listvals.push_front((1)); 
+		}
+	else{
+	        cv=1;
+	              board[x][y] = 1; 
+	              listx.push_front(x); 
+	               listy.push_front(y); 
+	               listvals.push_front((1)); 
+			  }
+			  
+	              
+		   
+	               }
+	          }
+	     } 
+	     else 
+	     { 
+	      x = listx.back();
+          y = listy.back(); 
+	     } 
+	if((x == gx)&&(y == gy)){found = true;} 
+	     x = cx; 
+	     y = cy - 1; //Check if search can continue in the cell that is to the top of the current cell
+	     if((x > -1)&&(x < sizex)&&(y > -1)&&(y < sizey)) 
+	     { 
+	          if(check(x,y) == false) 
+	          { 
+	          	if (board[x][y] == -10){  
+                   board[x][y] = -10; 
+               } 
+                  else{ 
+	                if(cv == 1)
+				  {
+					
+				   board[x][y] = cv+1;
+				   listx.push_front(x); 
+	               listy.push_front(y); 
+	               listvals.push_front((cv + 1)); 
+					
+	}
+	else if (cv == 2)
+	{
+		board[x][y] = cv+1;
+		listx.push_front(x); 
+	    listy.push_front(y); 
+	    listvals.push_front((cv + 1)); 
+		}
+		else if (cv == 3)
+	{
+		board[x][y] = 1;
+		listx.push_front(x); 
+	    listy.push_front(y); 
+	    listvals.push_front((1)); 
+		}
+	else{
+	        cv=1;
+	              board[x][y] = 1; 
+	              listx.push_front(x); 
+	              listy.push_front(y); 
+	              listvals.push_front((1)); 
+			  }
+			  
+	              }
+	          }
+	     } 
+	     else 
+	     { 
+	      x = listx.back();
+          y = listy.back(); 
+	     } 
+	if((x == gx)&&(y == gy)){found = true;} 
+	     x = cx - 1; //Check if search can continue in the cell that is to the left of the current cell
+	     y = cy; 
+	     if((x > -1)&&(x < sizex)&&(y > -1)&&(y < sizey)) 
+	     { 
+	          if(check(x,y) == false) 
+	          { 
+	          	if (board[x][y] == -10){ 
+                
+                 board[x][y] = -10; 
+               } 
+               else{ 
+	           if(cv == 1)
+				  {
+					
+				   board[x][y] = cv+1;
+				   listx.push_front(x); 
+	               listy.push_front(y); 
+	               listvals.push_front((cv + 1)); 
+					
+	}
+	else if (cv == 2)
+	{
+		board[x][y] = cv+1;
+		listx.push_front(x); 
+	    listy.push_front(y); 
+	    listvals.push_front((cv + 1)); 
+		}
+		else if (cv == 3)
+	{
+		board[x][y] = 1;
+		listx.push_front(x); 
+	    listy.push_front(y); 
+	    listvals.push_front((1)); 
+		}
+	else{
+	              cv=1;
+	              board[x][y] = 1; 
+	              listx.push_front(x); 
+	              listy.push_front(y); 
+	              listvals.push_front((1)); 
+			  }
+	}
+
+	        }   
+	     } 
+	     else 
+	     { 
+	     x = listx.back();
+         y = listy.back(); 
+	     } 
+	
+	
+	if((x == gx)&&(y == gy)){found = true;} 
+	 
+	board[gx][gy]=cv+1;
+	
+	
+	
+	          listx.pop_back(); 
+	          listy.pop_back(); 
+	          listvals.pop_back(); 
+	
+	cv = cv+1;
+	if(cv >= 4)
+	{ 
+		cv = 1;    
+	} 
+	        
+	          
+
+	         
+	     }while (found ==false); 
+
+} 
+
+void aker::aker_traceback()
+{ 	cout<<"INSIDE TRACE\n";
+     int sx=value4;
+     int sy=value5;
+     int cx=value2;
+     int cy=value3;
+     int op;
+     int cal = ((sx==cx) && (sy==cy));
+     int val=board[sx][sy];
+     do{
+       if((val==3)||(val==2)){
+         op=sx+1; // Check if traceback can occur to the cell to the right of the current cell
+         
+          if(val-1==board[op][sy]) // Check if the value of nieghbor is one less that the value in current cell
+          {
+             val=board[op][sy]; 
+             board[op][sy]=-1;
+             cout<<"("<<op<<","<<sy<<")"<<endl;
+             sx=sx+1;
+             
+         }
+         }
+         else {
+         op=sx+1;
+         
+          if(board[op][sy]==3){
+             val=board[op][sy]; 
+             board[op][sy]=-1;
+             cout<<"("<<op<<","<<sy<<")"<<endl;
+             sx=sx+1;
+             
+         }  
+         }
+         if((val==3)||(val==2)){
+         op=sx-1;
+         
+      if(val-1==board[op][sy]){
+             val=board[op][sy]; 
+             board[sx][sy]=-1;
+             cout<<"("<<op<<","<<sy<<")"<<endl;
+             sx= sx-1;
+             
+         }
+         }
+         else {
+          if(board[op][sy]==3){
+             val=board[op][sy]; 
+             board[sx][sy]=-1;
+             cout<<"("<<op<<","<<sy<<")"<<endl;
+             sx= sx-1;
+             
+         }
+         }
+       if((val==3)||(val==2)){
+         op=sy-1;
+       if(val-1==board[sx][op]){
+             val=board[sx][op]; 
+             board[sx][sy]=-1;
+             cout<<"("<<sx<<","<<op<<")"<<endl;
+             sy=sy-1;
+            
+         }
+        }
+        else {
+           op=sy-1;
+            if(board[sx][op]==3){
+             val=board[sx][op]; 
+             board[sx][sy]=-1;
+             cout<<"("<<sx<<","<<op<<")"<<endl;
+             sy=sy-1;
+            
+         }
+        }
+          if((val==3)||(val==2)){
+          op=sy+1;
+        
+             if(val-1==board[sx][op]){
+             val=board[sx][op]; 
+             board[sx][sy]=-1;
+             cout<<"("<<sx<<","<<op<<")"<<endl;
+             sy=sy+1;
+            
+         }
+         }
+         else {
+           op=sy+1;
+        
+    if(board[sx][op]==3){
+             val=board[sx][op]; 
+             board[sx][sy]=-1;
+             cout<<"("<<sx<<","<<op<<")"<<endl;
+             sy=sy+1;
+            
+         }
+         }
+        
+         
+         
+         
+         
+         
+    
+         
+     }while( !((sx==value2) && (sy==value3)) );
+     board[cx][cy]=-1;
+ }
+
+/*
+The display function shows the contents of the matrix 
+*/
+
+void aker::display() 
+{ 
+cout << endl; 
+for (a=0; a<10; a++) 
+{ 
+     for (b=0; b<10; b++) 
+     { 
+     cout << board[a][b]; 
+     cout << "  "; 
+      
+     } cout << "\n";
+} 
+cout << endl; cout<<endl; 
+
+} 
+/*
+The check function is used to see if the current cell in the matrix has value 0. If true it return a false staement 
+and if false it returns a true statement
+*/
+
+bool aker::check(int x, int y) 
+{ 
+     if(board[x][y] == 0) 
+     { 
+          return false; 
+     } 
+     else 
+     { 
+          return true; 
+     } 
+}
+
+
+
+
